@@ -141,7 +141,7 @@ export default async function({login, data, rest, q, account, imports}, {enabled
               if (!["opened", "closed"].includes(payload.action))
                 return null
               const {action, pull_request: {user: _user, title, number, body: content, additions: added, deletions: deleted, changed_files: changed, merged}} = payload
-              if (!_user.login)
+              if (!_user?.login)
                 return null
               const {login: user} = _user
               if (!imports.filters.text(user, ignored))
@@ -151,7 +151,7 @@ export default async function({login, data, rest, q, account, imports}, {enabled
             //Reviewed a pull request
             case "PullRequestReviewEvent": {
               const {review: {state: review}, pull_request: {user: _user, number, title}} = payload
-              if (!_user.login)
+              if (!_user?.login)
                 return null
               const {login: user} = _user
               if (!imports.filters.text(user, ignored))
@@ -163,7 +163,7 @@ export default async function({login, data, rest, q, account, imports}, {enabled
               if (!["created"].includes(payload.action))
                 return null
               const {pull_request: {user: _user, title, number}, comment: {body: content, performed_via_github_app: mobile}} = payload
-              if (!_user.login)
+              if (!_user?.login)
                 return null
               const {login: user} = _user
               if (!imports.filters.text(user, ignored))
